@@ -16,19 +16,21 @@ def pytest_addoption(parser):
     parser.addoption('--language', action='store', default='en',
                      help="Choose language: '--language=en' or '--language=ru'")
 
+
 # это добавит возможность писать опцию:
 # pytest -s -v --browser_name=firefox --reruns 1 --language=ru
 
 
 # добавляем параметр запуска тестов в командной строке(чем запускать, хромом или фаерфоксом) По умолчанию хром
-    # parser.addoption('--browser_name', action='store', default=None, help="Choose browser: chrome or firefox")
-    # Можно задать значение параметра по умолчанию,
-    # чтобы в командной строке не обязательно было указывать параметр --browser_name, например, так:
+# parser.addoption('--browser_name', action='store', default=None, help="Choose browser: chrome or firefox")
+# Можно задать значение параметра по умолчанию,
+# чтобы в командной строке не обязательно было указывать параметр --browser_name, например, так:
 
 # Запуск браузера(для каждой функции)
 @pytest.fixture(scope="function")  # по умолчанию запускается для каждой функции
 def browser(request):
-    browser_name = request.config.getoption("browser_name")  # получаем параметр командной строки browser_name
+    browser_name = request.config.getoption(
+        "browser_name")  # получаем параметр командной строки browser_name
     user_language = request.config.getoption("language")
     browser = None
 
@@ -55,4 +57,3 @@ def browser(request):
 
 # pip freeze > requirements.txt   Эта команда сохранит все версии пакетов в специальный файл requirements.txt.
 # pip install -r requirements.txt  В свежем окружении все пакеты установлены одной командой!
-
