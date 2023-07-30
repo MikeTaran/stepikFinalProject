@@ -17,8 +17,8 @@ def pytest_addoption(parser):
                      help="Choose language: '--language=en' or '--language=ru'")
 
 
-# это добавит возможность писать опцию:
-# pytest -s -v --browser_name=firefox --reruns 1 --language=ru
+# это добавит возможность писать параметры в коммандной строке:
+# pytest -s -v --browser_name=firefox --language=ru
 
 
 # добавляем параметр запуска тестов в командной строке(чем запускать, хромом или фаерфоксом) По умолчанию хром
