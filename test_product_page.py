@@ -3,8 +3,8 @@ import time
 
 from pages.basket_page import BasketPage
 from pages.login_page import LoginPage
-from .pages.base_page import BasePage
-from .pages.product_page import ProductPage
+from pages.base_page import BasePage
+from pages.product_page import ProductPage
 
 # url = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-shellcoders-handbook_209/?promo=newYear"
 url_base = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer'
@@ -17,11 +17,9 @@ class TestProductPage:
     def test_guest_can_add_product_to_basket(self, browser, url):
         page = BasePage(browser, url)
         page.open()
-        # Инициализируем ProductPage в теле теста
         product_page = ProductPage(browser, url)
         product_page.add_to_basket()
         page.solve_quiz_and_get_code()
-        # Asserts
         product_page.should_be_add_product()
 
     @pytest.mark.xfail
@@ -73,3 +71,26 @@ class TestProductPage:
         basket_page = BasketPage(browser, url)
         basket_page.should_be_basket_empty()
         basket_page.should_be_emptybasket_message()
+
+
+class TestUserAddToBasketFromProductPage:
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self):
+        pass
+
+
+    def test_user_cant_see_success_message(self, browser):
+        url = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+        page = BasePage(browser, url)
+        product_page = ProductPage(browser, url)
+        page.open()
+        product_page.should_not_be_success_message()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        url = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+        page = BasePage(browser, url)
+        page.open()
+        product_page = ProductPage(browser, url)
+        product_page.add_to_basket()
+        page.solve_quiz_and_get_code()
+        product_page.should_be_add_product()
