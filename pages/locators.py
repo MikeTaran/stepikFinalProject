@@ -9,6 +9,7 @@ class MainPageLocators:
 class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    BASKET_LINK = (By.CSS_SELECTOR, 'header .basket-mini a.btn-default')
 
 
 class LoginPageLocators:
@@ -24,3 +25,8 @@ class ProductPageLocators:
     BASKET_PRICE1 = (By.CSS_SELECTOR, ".basket-mini")
     MESSAGE_NAME = (By.CSS_SELECTOR, "div.alertinner>strong")
     SUCCESS_MESSAGE = (By.XPATH, "//div[@id='messages']//div[1]//div[1]")
+
+
+class BasketPageLocators:
+    LIST_OF_PRODUCT = (By.CSS_SELECTOR, "#basket_formset>div")
+    EMPTY_PRODUCT_MESSAGE = (By.CSS_SELECTOR, ".page_inner #messages")

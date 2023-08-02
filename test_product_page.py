@@ -1,6 +1,7 @@
 import pytest
 import time
 
+from pages.basket_page import BasketPage
 from pages.login_page import LoginPage
 from .pages.base_page import BasePage
 from .pages.product_page import ProductPage
@@ -64,3 +65,11 @@ class TestProductPage:
                                browser.current_url)
         login_page.should_be_login_page()
         # time.sleep(5)
+
+    def test_guest_cant_see_product_in_basket_opened_from_product_page(self, browser, url):
+        page = ProductPage(browser, url)
+        page.open()
+        page.go_to_basket()
+        basket_page = BasketPage(browser, url)
+        basket_page.should_be_basket_empty()
+        basket_page.should_be_emptybasket_message()
