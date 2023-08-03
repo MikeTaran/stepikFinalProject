@@ -1,13 +1,13 @@
 import pytest
 
+from pages.base_page import BasePage
 from pages.basket_page import BasketPage
 from pages.login_page import LoginPage
-from pages.base_page import BasePage
 from pages.product_page import ProductPage
 
 # url = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-shellcoders-handbook_209/?promo=newYear"
 url_base = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer'
-links = [pytest.param((url_base + str(i)), marks=pytest.mark.xfail(i == 7, reason='')) for i in range(1)]
+links = [pytest.param((url_base + str(i)), marks=pytest.mark.xfail(i == 7, reason='')) for i in range(10)]
 
 
 @pytest.mark.parametrize('url', links)
@@ -74,9 +74,12 @@ class TestProductPage:
 
 class TestUserAddToBasketFromProductPage:
     @pytest.fixture(scope="function", autouse=True)
-    def setup(self):
-        pass
-
+    def setup(self, browser):
+        url = 'https://selenium1py.pythonanywhere.com/en-gb/accounts/login/'
+        page = LoginPage(browser, url)
+        page.open()
+        page.register_new_user()
+        page.should_be_authorized_user()
 
     def test_user_cant_see_success_message(self, browser):
         url = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-shellcoders-handbook_209/?promo=newYear"
