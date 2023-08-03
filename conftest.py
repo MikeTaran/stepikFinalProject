@@ -1,6 +1,5 @@
 from selenium import webdriver
 import pytest
-import time
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.options import Options as OptionsFirefox
 

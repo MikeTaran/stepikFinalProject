@@ -24,7 +24,7 @@ class LoginPage(BasePage):
 
     def register_new_user(self):
         reg_email = str(time.time()) + "@fakemail.org"
-        reg_pass = reg_email+'123'
+        reg_pass = reg_email + '123'
         email_field = self.find_element(LoginPageLocators.REGISTRATION_EMAIL)
         pass_field = self.find_element(LoginPageLocators.REGISTRATION_PASS)
         conf_pass_field = self.find_element(LoginPageLocators.CONFIRMATION_PASS)
